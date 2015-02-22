@@ -55,15 +55,15 @@ public class Main extends Activity implements OnClickListener{
         stopService(new Intent(this, MyService.class));
     }
 
-    private void toggleButtonImage(){
-        if(isFlashOn){
-            btnSwitch.setImageResource(R.drawable.btn_switch_off);
-            isFlashOn = false;
-        }else{
-            btnSwitch.setImageResource(R.drawable.btn_switch_on);
-            isFlashOn = true;
-        }
-    }
+//    private void toggleButtonImage(){
+//        if(isFlashOn){
+//            btnSwitch.setImageResource(R.drawable.btn_switch_off);
+//            isFlashOn = false;
+//        }else{
+//            btnSwitch.setImageResource(R.drawable.btn_switch_on);
+//            isFlashOn = true;
+//        }
+//    }
 
 
     @Override
@@ -71,12 +71,18 @@ public class Main extends Activity implements OnClickListener{
         switch (v.getId()){
             case R.id.btnSwitch:
                 if (isFlashOn){
+                    btnSwitch.setImageResource(R.drawable.btn_switch_off);
+                    isFlashOn = false;
                     stopService(new Intent(this, MyService.class));
-                    toggleButtonImage();
+
+                   // toggleButtonImage();
 
                 }else {
+                    btnSwitch.setImageResource(R.drawable.btn_switch_on);
+                    isFlashOn = true;
                     startService(new Intent(this, MyService.class));
-                    toggleButtonImage();
+
+                  //  toggleButtonImage();
                 }
         }
     }
