@@ -28,12 +28,12 @@ public class NewAppWidget extends AppWidgetProvider {
             int appWidgetId = appWidgetIds[i];
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-
+            views.setImageViewResource(R.id.imageButton, R.drawable.btn_switch_off);
             Intent newIntent = new Intent(context, NewAppWidget.class);
             newIntent.setAction(START);
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, newIntent, 0);
-            views.setOnClickPendingIntent(R.id.button, pendingIntent);
+            views.setOnClickPendingIntent(R.id.imageButton, pendingIntent);
 
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -52,8 +52,11 @@ public class NewAppWidget extends AppWidgetProvider {
             Intent serviceIntent = new Intent(context, MyService.class);
 
             if(serviceRunning) {
+                remoteViews.setImageViewResource(R.id.imageButton, R.drawable.btn_switch_off);
                 context.stopService(serviceIntent);
+
             } else {
+                remoteViews.setImageViewResource(R.id.imageButton, R.drawable.btn_switch_on);
                 context.startService(serviceIntent);
             }
             serviceRunning = !serviceRunning;
